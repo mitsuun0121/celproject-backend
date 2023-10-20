@@ -8,7 +8,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-
 class Admin extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable;
@@ -23,6 +22,7 @@ class Admin extends Authenticatable implements JWTSubject
         'email',
         'password',
         'user_id',
+        'user_shift_id',
     ];
 
     /**
@@ -43,7 +43,8 @@ class Admin extends Authenticatable implements JWTSubject
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    
+
+
     public function getJWTIdentifier()
     {
     return $this->getKey();
@@ -56,6 +57,11 @@ class Admin extends Authenticatable implements JWTSubject
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
+    }
+
+    public function user_shift()
+    {
+        return $this->belongsTo(User_shift::class);
     }
 }

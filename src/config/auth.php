@@ -36,9 +36,10 @@ return [
     */
 
     'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
+        'admin' => [
+            'driver' => 'jwt',
+            'provider' => 'admins',
+            'hash' => false,
         ],
 
         'api' => [
@@ -47,18 +48,9 @@ return [
             'hash' => false,
         ],
 
-        /*'admins' => [
-            'driver' => 'jwt',
-            'provider' => 'admins',
-        ],*/
-
-        'users' => [ // user ガードの定義
-            'driver' => 'jwt', // ドライバーを適切に設定
-            'provider' => 'users', // プロバイダーを適切に設定
-        ],
     ],
-    
 
+   
     /*
     |--------------------------------------------------------------------------
     | User Providers
@@ -77,14 +69,14 @@ return [
     */
 
     'providers' => [
-        /*'admins' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Admin::class,
-        ],*/
-
-        'users' => [
+         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class, 
+        ],
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
         ],
     ],
 
@@ -104,19 +96,19 @@ return [
     */
 
     'passwords' => [
-       /*'admins' => [
-            'provider' => 'admins',
-            'table' => 'password_resets',
-            'expire' => 60,
-            'throttle' => 60,
-        ],*/
-
-        'users' => [
+         'users' => [
             'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
-        ],
+         ],
+
+        'admins' => [
+            'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+         ],
     ],
 
     /*
