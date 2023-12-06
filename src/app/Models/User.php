@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -22,6 +23,8 @@ class User extends Authenticatable implements JWTSubject
         'email',
         'password',
         'gender',
+        'user_id',
+        'api_token',
     ];
 
     /**
@@ -42,8 +45,7 @@ class User extends Authenticatable implements JWTSubject
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    
-    
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -52,5 +54,17 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function generateApiToken()
+    {
+        $this->api_token = Str::random(60);
+        $this->save();
+        return $this->api_token;
     }
 }

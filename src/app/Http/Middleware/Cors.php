@@ -17,6 +17,7 @@ class Cors
     public function handle(Request $request, Closure $next)
     {
         $response = $next($request);
+        \Log::info('CORSヘッダー情報: ' . json_encode($response->headers->all()));
         $response->withHeaders([
         'Access-Control-Allow-Origin' => '*',
         ]);

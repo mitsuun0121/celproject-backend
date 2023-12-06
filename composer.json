@@ -1,0 +1,17 @@
+{
+    "name": "mitsuun/celpj-backend",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Mitsuun\\CelpjBackend\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "mitsuun",
+            "email": "lounge.attachment@gmail.com"
+        }
+    ],
+    "require": {}
+}

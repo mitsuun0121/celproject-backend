@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Support\Str;
 
 class Admin extends Authenticatable implements JWTSubject
 {
@@ -21,8 +22,7 @@ class Admin extends Authenticatable implements JWTSubject
         'name',
         'email',
         'password',
-        'user_id',
-        'user_shift_id',
+        'api_token',
     ];
 
     /**
@@ -55,13 +55,10 @@ class Admin extends Authenticatable implements JWTSubject
     return [];
     }
 
-    public function user()
+    public function generateApiToken()
     {
-        return $this->belongsTo(User::class);
-    }
-
-    public function user_shift()
-    {
-        return $this->belongsTo(User_shift::class);
+        $this->api_token = Str::random(60);
+        $this->save();
+        return $this->api_token;
     }
 }

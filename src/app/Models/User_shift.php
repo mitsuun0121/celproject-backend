@@ -20,7 +20,6 @@ class User_shift extends Authenticatable implements JWTSubject
     protected $fillable = [
         'id',
         'user_id',
-        'guest_id',
         'shift_date',
         'start_time',
         'end_time',
@@ -39,10 +38,5 @@ class User_shift extends Authenticatable implements JWTSubject
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function guest()
-    {
-        return $this->belongsTo(Guest::class);
     }
 }

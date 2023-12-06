@@ -36,6 +36,13 @@ return [
     */
 
     'guards' => [
+        
+        'user' => [
+            'driver' => 'jwt', // または 'token' に変更
+            'provider' => 'users',
+            'hash' => false,
+        ],
+
         'admin' => [
             'driver' => 'jwt',
             'provider' => 'admins',
@@ -47,7 +54,6 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
-
     ],
 
    

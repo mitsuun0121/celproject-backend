@@ -26,6 +26,7 @@ class Guest extends Authenticatable implements JWTSubject
         'message',
         'date',
         'timeSlot',
+        'user_id',
     ];
 
     public function getJWTIdentifier()
@@ -38,4 +39,8 @@ class Guest extends Authenticatable implements JWTSubject
         return [];
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

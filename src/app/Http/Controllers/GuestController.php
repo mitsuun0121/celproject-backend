@@ -41,5 +41,18 @@ class GuestController extends Controller
         // 保存後の処理やレスポンスを返す
         return response()->json(['message' => 'データが保存されました']);
 
-    }   
+    }
+    
+    public function destroy($id)
+    {
+        $guest = Guest::find($id);
+
+        if (!$guest) {
+            return response()->json(['message' => '予約データが見つかりません'], 404);
+        }
+
+        $guest->delete();
+
+        return response()->json(['message' => '予約データが削除されました'], 200);
+    }
 }

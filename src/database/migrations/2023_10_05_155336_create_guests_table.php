@@ -23,6 +23,8 @@ class CreateGuestsTable extends Migration
             $table->string('message');
             $table->date('date');
             $table->time('timeSlot');
+            $table->unsignedBigInteger('user_id')->nullable()->default(null); // unsignedBigInteger型を使用
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); // 'users' テーブルの 'id' 列を参照
             $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();
         });

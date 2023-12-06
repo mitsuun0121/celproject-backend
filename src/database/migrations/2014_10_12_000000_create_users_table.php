@@ -20,7 +20,8 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('gender')->default(1);
-            $table->string('api_token', 80)->unique()->nullable()->default(null);
+            $table->unsignedBigInteger('user_id')->nullable()->default(null); // unsignedBigInteger型を使用
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); // 'users' テーブルの 'id' 列を参照
             $table->timestamps();
         });
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User_shift;
+use Illuminate\Support\Facades\Hash;
 
 class ShiftController extends Controller
 {
