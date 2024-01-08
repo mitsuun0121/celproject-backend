@@ -5,20 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Guest;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Jobs\SendReservationEmail;
+use App\Jobs\SendCounselingEmail;
 
 class GuestController extends Controller
 {
 
     public function index()
     {
-
         // 顧客のデータを取得
         $data = Guest::all();
 
         // レスポンスとしてデータをJSON形式で返す
         return response()->json($data, 200);
-
     }
 
     public function store(Request $request)
@@ -36,10 +37,24 @@ class GuestController extends Controller
         }
 
         // データベースに保存
-        Guest::create($data);
+        $guest = Guest::create($data);
+
+        // メール送信ジョブをディスパッチ
+        dispatch(new SendReservationEmail($guest->id, $guest->email, $guest->name, $guest->date, $guest->timeSlot));
+
+        // 予約に紐づいたuser_idを取得
+        $userId = $guest->user_id;
+
+        // 担当者のIDを取得
+        $user = User::find($userId);
+
+        if ($user) {
+            // メール送信ジョブをディスパッチ
+            dispatch(new SendCounselingEmail($guest->id, $user->id, $guest->date, $guest->timeSlot));
+        }
 
         // 保存後の処理やレスポンスを返す
-        return response()->json(['message' => 'データが保存されました']);
+        return response()->json(['message' => 'データが保存されて、メールが送信されました。']);
 
     }
     

@@ -56,11 +56,6 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
     public function generateApiToken()
     {
         $this->api_token = Str::random(60);

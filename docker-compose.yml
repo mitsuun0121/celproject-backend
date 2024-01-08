@@ -40,3 +40,19 @@ services:
             - mysql
         ports:
             - 8080:80
+
+    queue:
+        build: ./docker/php
+        volumes:
+            - ./src:/var/www/
+        depends_on:
+            - mysql
+        command: php artisan queue:work
+
+    scheduler:
+        build: ./docker/php
+        volumes:
+            - ./src:/var/www/
+        depends_on:
+            - mysql
+        command: php artisan schedule:work

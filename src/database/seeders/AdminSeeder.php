@@ -19,19 +19,13 @@ class AdminSeeder extends Seeder
     {
 
         $param = [
-        'name' => '中田',
+        'name' => '管理者',
         'email' => 'example1@gmail.com',
-        'password' => '12345678',
+        'password' => '1234abcd',
         ];
         DB::table('admins')->insert($param);
 
-        $param = [
-        'name' => '田中',
-        'email' => 'example2@gmail.com',
-        'password' => '09876543',
-        ];
-        DB::table('admins')->insert($param);
-      }
+    }
     
 }
 
