@@ -45,12 +45,13 @@ class CounselingMail extends Mailable implements ShouldQueue
     {
         \Log::info('Guest in build method: ' . print_r($this->guest, true));
         return $this->view('emails.counseling_mail')
-            ->from('celproject@example.com')
+            ->from('celproject@example.com', 'Child Edu Laboratory')
             ->text('emails.counseling_mail')
             ->with([
                 'userName' => $this->userName,
                 'date' => Carbon::parse($this->guest->date)->format('Y年m月d日'),
                 'timeSlot' => Carbon::parse($this->guest->timeSlot)->format('H時'),
-            ]);
+            ])
+            ->subject('カウンセリングの予約');
     }
 }

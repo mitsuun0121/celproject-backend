@@ -39,13 +39,14 @@ class ReservationMail extends Mailable implements ShouldQueue
     public function build()
     {
         return $this->view('emails.reservation_mail')
-            ->from('celproject@example.com')
+            ->from('celproject@example.com', 'Child Edu Laboratory')
             ->text('emails.reservation_mail')
             ->with([
                 'guestEmail' => $this->guest->email,
                 'guestName' => $this->guest->name,
                 'date' => Carbon::parse($this->guest->date)->format('Y年m月d日'),
                 'timeSlot' => Carbon::parse($this->guest->timeSlot)->format('H時'),
-            ]);
+            ])
+            ->subject('無料カウンセリングのご予約');
     }
 }

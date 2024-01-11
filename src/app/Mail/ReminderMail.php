@@ -39,7 +39,8 @@ class ReminderMail extends Mailable implements ShouldQueue
     public function build()
     {
         return $this->view('emails.reminder_mail')
-            ->from('celproject@example.com')
-            ->text('emails.reminder_mail');
+            ->from('celproject@example.com', 'Child Edu Laboratory')
+            ->text('emails.reminder_mail')
+            ->subject('無料カウンセリングのお知らせ');
     }
 }
