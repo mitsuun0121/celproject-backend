@@ -20,8 +20,8 @@ class AdminSeeder extends Seeder
 
         $param = [
         'name' => '管理者',
-        'email' => 'example1@gmail.com',
-        'password' => '1234abcd',
+        'email' => 'example@gmail.com',
+        'password' => Hash::make('1234abcd'),
         ];
         DB::table('admins')->insert($param);
 
