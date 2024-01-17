@@ -22,6 +22,10 @@ class UserAuthController extends Controller
             'gender' => 'required',
             'password' => 'required|string|min:8',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 422);
+        }
         
         User::create([
         "name" => $request->name,
