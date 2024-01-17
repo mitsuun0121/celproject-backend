@@ -16,6 +16,13 @@ class UserAuthController extends Controller
 
     public function register(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'gender' => 'required',
+            'password' => 'required|string|min:8',
+        ]);
+        
         User::create([
         "name" => $request->name,
         "email" => $request->email,
